@@ -235,7 +235,7 @@ Easier to maintain mobile & web builds together.
 
 # 👨‍💻 Author
 
-**Asif Mahmud**
+**Md Monirul Jim**
 *Full-Stack Mobile Developer*
 🔗 GitHub: *Monirul-Jim*
 
@@ -246,12 +246,3 @@ Easier to maintain mobile & web builds together.
 MIT (Free to use)
 
 ---
-
-If you want, I can also:
-
-✅ Add screenshots
-✅ Add GIF preview
-✅ Create badges (Build, Expo, TypeScript, Redux)
-✅ Add contributors section
-
-Just tell me!
