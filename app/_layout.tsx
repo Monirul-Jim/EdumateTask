@@ -5,8 +5,9 @@ import 'react-native-reanimated';
 import "../global.css"
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Provider } from 'react-redux';
-import { store } from '@/redux/store';
+import { persistor, store } from '@/redux/store';
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { PersistGate } from "redux-persist/integration/react";
 
 export const unstable_settings = {
   anchor: '(tabs)',
@@ -17,18 +18,21 @@ export default function RootLayout() {
 
   return (
     <Provider store={store}>
-      <SafeAreaProvider>
-        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-          
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-          </Stack>
+      <PersistGate loading={null} persistor={persistor}>
 
-          <StatusBar style="auto" />
+        <SafeAreaProvider>
+          <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
 
-        </ThemeProvider>
-      </SafeAreaProvider>
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+            </Stack>
+
+            <StatusBar style="auto" />
+
+          </ThemeProvider>
+        </SafeAreaProvider>
+      </PersistGate>
     </Provider>
   );
 }

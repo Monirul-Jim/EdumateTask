@@ -1,50 +1,257 @@
-# Welcome to your Expo app 👋
+# **📘 EdumateTask — Mobile & Web Application**
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A cross-platform **Education Management App** built using **Expo + React Native + Expo Router + Redux Toolkit + RTK Query + NativeWind (Tailwind CSS)**.
+This project supports **Android, iOS, and Web** from a single codebase.
 
-## Get started
+---
 
-1. Install dependencies
+## 🚀 **Features**
 
-   ```bash
-   npm install
-   ```
+* 👤 User Authentication (Redux Persist)
+* 🌓 System-Level Dark Mode + Manual Toggle
+* 📱 Fully responsive for **Mobile & Web**
+* ⚡ API integration using **RTK Query**
+* 🎛 Modern UI using **NativeWind (Tailwind CSS)**
+* 🧩 Modular & Scalable Architecture
+* 🔄 Optimistic updates + Caching
+* 🧭 Expo Router navigation (tabs + stacks)
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+# 📦 **Project Structure**
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+EdumateTask/
+│── app/                      # Expo Router (screens + routes)
+│   ├── (tabs)/               # Bottom tabs: Home, Post, Profile
+│   ├── (auth)/               # Login / Register
+│   ├── modal.tsx
+│── redux/
+│   ├── api/                  # RTK Query APIs
+│   ├── feature/              # Slices
+│   ├── store.ts              # Global store + Persist
+│── components/               # Reusable UI components
+│── hooks/                    # Custom hooks (color scheme, etc.)
+│── global.css                # Tailwind setup
+│── package.json
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+# 🛠 **Tech Stack**
 
-To learn more about developing your project with Expo, look at the following resources:
+| Layer           | Tools                                 |
+| --------------- | ------------------------------------- |
+| UI              | React Native, Expo Router, NativeWind |
+| State           | Redux Toolkit, Redux Persist          |
+| Data Fetching   | RTK Query                             |
+| Platform        | Expo SDK                              |
+| Animations      | Reanimated                            |
+| API             | JSONPlaceholder (demo)                |
+| Device Features | Expo Haptics                          |
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+# 🔧 **Installation Guide**
 
-Join our community of developers creating universal apps.
+## **1️⃣ Install Expo CLI (if missing)**
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+npm install -g expo-cli
+```
+
+---
+
+# 📥 **2️⃣ Clone the Repository**
+
+```bash
+git clone https://github.com/Monirul-Jim/EdumateTask
+cd EdumateTask
+```
+
+---
+
+# 📦 **3️⃣ Install Dependencies**
+
+```bash
+npm install
+```
+
+---
+
+# ▶️ **4️⃣ Run the App**
+
+### **📱 Mobile (Android / iOS)**
+
+```bash
+npx expo start
+```
+
+Scan the QR code with Expo Go.
+
+---
+
+### **🖥 Web**
+
+```bash
+npx expo start --web
+```
+
+---
+
+# 🎯 **Environment Setup (Optional)**
+
+Create `.env` if using custom backend:
+
+```
+API_URL=https://example.com
+```
+
+---
+
+# 🧩 **State Management**
+
+This project uses:
+
+### 🔹 **Redux Toolkit**
+
+* Centralized store
+* Scalable reducers and slices
+
+### 🔹 **RTK Query**
+
+* Auto caching
+* Auto request deduping
+* Background refetch
+* Normalized response handling
+
+Example:
+
+```ts
+const { data, isLoading } = useGetUsersQuery();
+```
+
+### 🔹 **Redux Persist**
+
+* Saves user session
+* Works on **web & native**
+* Uses `AsyncStorage` or `localStorage` based on platform
+
+---
+
+# ⚡ **Caching Strategy (RTK Query)**
+
+RTK Query provides:
+
+* **Aggressive caching** to avoid unnecessary API calls
+* **Refetch-on-mount**, **refetch-on-focus**
+* Background updates
+* Optimistic cache update for Post creation
+
+Example config:
+
+```ts
+keepUnusedDataFor: 60,
+refetchOnFocus: true,
+```
+
+---
+
+# 🏗 **Architecture Explanation**
+
+### **Why Expo?**
+
+* Zero-config cross-platform development
+* Web + Mobile in one codebase
+* Faster deployment
+
+### **Why Expo Router?**
+
+* File-based routing
+* Cleaner screen structure
+* Better deep link support
+* Automatic type-safe routes
+
+### **Why Redux Toolkit?**
+
+* Eliminates boilerplate
+* Predictable global state
+* Simplifies async logic
+
+### **Why RTK Query?**
+
+* Built-in caching
+* Easy CRUD handling
+* Better API maintainability
+
+### **Why NativeWind?**
+
+* Tailwind consistency
+* Fast development
+* Dynamic theme support
+
+---
+
+# ⚖ **Trade-offs & Decisions**
+
+### ✔ Chosen: **Redux Toolkit + RTK Query**
+
+**Reason:**
+Reliable, scalable, strong caching, works across web + native better than Zustand or React Query.
+
+---
+
+### ✔ Chosen: **Expo Router**
+
+**Reason:**
+Cleaner navigation structure, better DX than React Navigation custom stacks.
+
+---
+
+### ✔ Chosen: **NativeWind**
+
+**Reason:**
+Tailwind helps maintain consistent UI faster.
+
+---
+
+### ✔ Chosen: **Monorepo-like Expo structure**
+
+**Reason:**
+Easier to maintain mobile & web builds together.
+
+---
+
+# 📚 **Available Scripts**
+
+| Command            | Description         |
+| ------------------ | ------------------- |
+| `expo start`       | Start dev server    |
+| `expo start --web` | Run web app         |
+| `expo build`       | Expo build tools    |
+| `expo prebuild`    | Bare workflow build |
+
+---
+
+# 👨‍💻 Author
+
+**Asif Mahmud**
+*Full-Stack Mobile Developer*
+🔗 GitHub: *Monirul-Jim*
+
+---
+
+# 📄 License
+
+MIT (Free to use)
+
+---
+
+If you want, I can also:
+
+✅ Add screenshots
+✅ Add GIF preview
+✅ Create badges (Build, Expo, TypeScript, Redux)
+✅ Add contributors section
+
+Just tell me!
