@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   useWindowDimensions,
+  ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useMemo, useState } from "react";
@@ -40,7 +41,12 @@ export default function UserList() {
       className={`flex-1 items-center ${isDark ? "bg-gray-900" : "bg-white"
         } p-4 mb-10`}
     >
-      {/* Animated Wrapper */}
+       <ScrollView
+    className="w-full"
+    contentContainerStyle={{ alignItems: "center", paddingBottom: 40 }}
+    showsVerticalScrollIndicator={false}
+  >
+
       <Animated.View
         entering={FadeIn.duration(400)}
         style={{ width: contentWidth }}
@@ -108,6 +114,8 @@ export default function UserList() {
           />
         )}
       </Animated.View>
+  </ScrollView>
+      {/* Animated Wrapper */}
     </SafeAreaView>
   );
 }

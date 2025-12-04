@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   FlatList,
+  ScrollView,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -77,6 +78,12 @@ export default function CreatePost() {
         isDark ? "bg-gray-900" : "bg-white"
       }`}
     >
+       <ScrollView
+    className="w-full"
+    contentContainerStyle={{ alignItems: "center", paddingBottom: 40 }}
+    showsVerticalScrollIndicator={false}
+  >
+
       <View className="w-full max-w-2xl">
         <Text
           className={`text-2xl font-bold mb-5 ${
@@ -172,6 +179,7 @@ export default function CreatePost() {
           ListEmptyComponent={emptyList}
         />
       </View>
+  </ScrollView>
     </SafeAreaView>
   );
 }
