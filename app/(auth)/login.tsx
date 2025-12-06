@@ -12,6 +12,7 @@ import { useLoginUserMutation } from "@/redux/api/authApi";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/redux/feature/authSlice";
 import { Platform } from "react-native";
+import { broadcastLogin } from "@/redux/feature/authSync";
 type LoginForm = {
     username: string;
     password: string;
@@ -37,30 +38,55 @@ const Login = () => {
     };
 
     const errorMessage = getErrorMessage();
-    const onSubmit = async (data: LoginForm) => {
-        try {
-            const res = await loginUser(data).unwrap();
-            const apiData = res.payload.data;
+    // const onSubmit = async (data: LoginForm) => {
+    //     try {
+    //         const res = await loginUser(data).unwrap();
+    //         const apiData = res.payload.data;
 
-            dispatch(
-                setUser({
-                    user: {
-                        name: apiData.admin.name,
-                        email: apiData.admin.email,
-                        mobile: apiData.admin.mobile,
-                        status: apiData.admin.status,
-                        institute: apiData.admin.institute_details,
+    //         dispatch(
+    //             setUser({
+    //                 user: {
+    //                     name: apiData.admin.name,
+    //                     email: apiData.admin.email,
+    //                     mobile: apiData.admin.mobile,
+    //                     status: apiData.admin.status,
+    //                     institute: apiData.admin.institute_details,
 
-                    },
-                    token: apiData.authorization.access_token,
-                })
-            );
-            router.replace("/(tabs)");
-        } catch (err) {
-            console.log("Login Error:", err);
-        }
+    //                 },
+    //                 token: apiData.authorization.access_token,
+    //             })
+    //         );
+    //         router.replace("/(tabs)");
+    //     } catch (err) {
+    //         console.log("Login Error:", err);
+    //     }
+    // };
+const onSubmit = async (data: LoginForm) => {
+  try {
+    const res = await loginUser(data).unwrap();
+    const apiData = res.payload.data;
+
+    const userData = {
+      user: {
+        name: apiData.admin.name,
+        email: apiData.admin.email,
+        mobile: apiData.admin.mobile,
+        status: apiData.admin.status,
+        institute: apiData.admin.institute_details,
+      },
+      token: apiData.authorization.access_token,
     };
 
+    dispatch(setUser(userData));
+
+    // 🔥 notify all other tabs
+    broadcastLogin(userData);
+
+    router.replace("/(tabs)");
+  } catch (err) {
+    console.log("Login Error:", err);
+  }
+};
     return (
       <>
       <Stack.Screen

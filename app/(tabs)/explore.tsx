@@ -22,6 +22,7 @@ import { RootState } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { logout } from "@/redux/feature/authSlice";
 import { Redirect } from "expo-router";
+import { broadcastLogout } from "@/redux/feature/authSync";
 
 const THEME_TABS = ["Dark", "Light", "Device"];
 
@@ -71,12 +72,11 @@ export default function ProfileScreen() {
         }}
         showsVerticalScrollIndicator={false}
       >
-   
+
         <View className="mt-4 mb-6">
           <View
-            className={`flex-row relative rounded-2xl p-1 ${
-              isDark ? "bg-gray-800" : "bg-gray-200"
-            }`}
+            className={`flex-row relative rounded-2xl p-1 ${isDark ? "bg-gray-800" : "bg-gray-200"
+              }`}
           >
             <Animated.View
               style={[sliderStyle]}
@@ -95,9 +95,8 @@ export default function ProfileScreen() {
                 className="w-[100px] h-10 justify-center items-center"
               >
                 <Text
-                  className={`font-semibold ${
-                    isDark ? "text-white" : "text-gray-800"
-                  }`}
+                  className={`font-semibold ${isDark ? "text-white" : "text-gray-800"
+                    }`}
                 >
                   {t}
                 </Text>
@@ -106,17 +105,15 @@ export default function ProfileScreen() {
           </View>
         </View>
 
-     
+
         <Animated.View
           entering={FadeInDown.duration(600)}
-          className={`${
-            isDark ? "bg-gray-800" : "bg-gray-100"
-          } rounded-3xl p-6 shadow-md mb-6`}
+          className={`${isDark ? "bg-gray-800" : "bg-gray-100"
+            } rounded-3xl p-6 shadow-md mb-6`}
         >
           <Text
-            className={`text-xl font-bold ${
-              isDark ? "text-white" : "text-gray-800"
-            } mb-3`}
+            className={`text-xl font-bold ${isDark ? "text-white" : "text-gray-800"
+              } mb-3`}
           >
             Admin Info
           </Text>
@@ -127,17 +124,15 @@ export default function ProfileScreen() {
           <Info label="Status" value={user?.status} isDark={isDark} />
         </Animated.View>
 
-   
+
         <Animated.View
           entering={FadeInDown.delay(200).duration(600)}
-          className={`${
-            isDark ? "bg-blue-900/30" : "bg-blue-50"
-          } rounded-3xl p-6 shadow-md mb-10`}
+          className={`${isDark ? "bg-blue-900/30" : "bg-blue-50"
+            } rounded-3xl p-6 shadow-md mb-10`}
         >
           <Text
-            className={`text-xl font-bold ${
-              isDark ? "text-white" : "text-gray-800"
-            } mb-4`}
+            className={`text-xl font-bold ${isDark ? "text-white" : "text-gray-800"
+              } mb-4`}
           >
             Institute Details
           </Text>
@@ -161,7 +156,11 @@ export default function ProfileScreen() {
         </Animated.View>
 
         <TouchableOpacity
-          onPress={() => dispatch(logout())}
+          // onPress={() => dispatch(logout())}
+          onPress={() => {
+            dispatch(logout());
+            broadcastLogout();
+          }}
           className="bg-red-600 py-4 rounded-2xl items-center"
         >
           <Text className="text-white font-semibold text-lg">Logout</Text>
@@ -176,9 +175,8 @@ const Info = memo(
     <View className="mb-3">
       <Text className={isDark ? "text-gray-400" : "text-gray-600"}>{label}</Text>
       <Text
-        className={`text-lg font-semibold ${
-          isDark ? "text-white" : "text-gray-800"
-        }`}
+        className={`text-lg font-semibold ${isDark ? "text-white" : "text-gray-800"
+          }`}
       >
         {value}
       </Text>
