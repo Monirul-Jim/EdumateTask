@@ -84,7 +84,7 @@ npm install
 ### **📱 Mobile (Android / iOS)**
 
 ```bash
-npx expo start
+npx run start
 ```
 
 Scan the QR code with Expo Go.
